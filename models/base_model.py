@@ -4,7 +4,7 @@
 Module containing the base class of all our models
 """
 
-class Base_model:
+class Base():
     """
     """
     def __init__(self, id, created_at, updated_at):
