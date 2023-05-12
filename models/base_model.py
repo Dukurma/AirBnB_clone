@@ -10,11 +10,24 @@ import models
 class BaseModel:
     ''' Base class that all other classes inherit from '''
 
-    def __init__(self, id=None, created_at=None, updated_at=None):
+    def __init__(self, *args, **kwargs):
         ''' Initializes the base model '''
         self.id = str(uuid4())
         self.created_at = datetime.today()
         self.updated_at = datetime.today()
+
+        dateformat = "%Y-%m-%dT%H:%M:%S.%f"
+        
+        if len(kwargs) != 0:
+            for key, value in kwargs.items():
+                if key == "created_at":
+                    self.created_at = datetime.strptime(value, dateformat)
+                elif key == "updated_at":
+                    self.updated_at = datetime.strptime(value, dateformat)
+                elif key == "__class__":
+                    pass
+                else:
+                    self.__dict__[key] = value
 
     def __str__(self):
         ''' Returns a readable form of the instance '''
