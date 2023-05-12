@@ -29,7 +29,7 @@ class BaseModel:
                 else:
                     self.__dict__[key] = value
         else:
-           models.storage.new(self)
+            models.storage.new(self)
 
     def __str__(self):
         ''' Returns a readable form of the instance '''
