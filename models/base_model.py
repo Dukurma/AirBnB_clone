@@ -17,7 +17,7 @@ class BaseModel:
         self.updated_at = datetime.today()
 
         dateformat = "%Y-%m-%dT%H:%M:%S.%f"
-        
+
         if len(kwargs) != 0:
             for key, value in kwargs.items():
                 if key == "created_at":
@@ -28,6 +28,8 @@ class BaseModel:
                     pass
                 else:
                     self.__dict__[key] = value
+        else:
+           models.storage.new(self)
 
     def __str__(self):
         ''' Returns a readable form of the instance '''
@@ -36,6 +38,7 @@ class BaseModel:
     def save(self):
         '''Saves a newly added instance'''
         self.updated_at = datetime.today()
+        models.storage.save()
 
     def to_dict(self):
         ''' Convert an instance to a dict'''
