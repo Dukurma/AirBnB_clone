@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """Create the AirBnB  console."""
 
 import cmd
@@ -24,7 +24,7 @@ class HBNBCommand(cmd.Cmd):
     """
 
     prompt = "(hbnb) "
-    classes = {"BaseModel", "FileStorage", "User", "State",
+    classes = {"BaseModel", "User", "State",
             "City", "Amenity", "Place", "Review"}
 
     def emptyline(self):
