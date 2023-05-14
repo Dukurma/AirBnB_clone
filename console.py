@@ -2,6 +2,7 @@
 """Create the AirBnB  console."""
 
 import cmd
+import re
 from shlex import split
 from models import storage
 from models.base_model import BaseModel
@@ -28,7 +29,6 @@ class HBNBCommand(cmd.Cmd):
         """Do nothing upon receiving an empty line."""
         pass
 
-    '''
     def default(self, arg):
         """Default behavior for cmd module when input is invalid"""
         argdict = {
@@ -49,7 +49,7 @@ class HBNBCommand(cmd.Cmd):
                     return argdict[command[0]](call)
         print("*** Unknown syntax: {}".format(arg))
         return False
-    '''
+
 
     def do_quit(self, arg):
         """Quit command to exit the program."""
@@ -164,10 +164,9 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class doesn't exist **")
 
+    '''
     def default(self, line):
-        '''
-        Method to accept a class name followed by argument
-        '''
+        """ Method to accept a class name followed by argument """
         args = line.split('.')
         class_arg = args[0]
         if len(args) == 1:
@@ -211,7 +210,7 @@ class HBNBCommand(cmd.Cmd):
                 print("*** Unknown syntax: {}".format(line))
         except IndexError:
             print("*** Unknown syntax: {}".format(line))
-
+    '''
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
