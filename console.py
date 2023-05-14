@@ -31,6 +31,7 @@ class HBNBCommand(cmd.Cmd):
         """Do nothing upon receiving an empty line."""
         pass
 
+    '''
     def default(self, arg):
         """Default behavior for cmd module when input is invalid"""
         argdict = {
@@ -51,6 +52,7 @@ class HBNBCommand(cmd.Cmd):
                     return argdict[command[0]](call)
         print("*** Unknown syntax: {}".format(arg))
         return False
+    '''
 
     def do_quit(self, arg):
         """Quit command to exit the program."""
@@ -214,9 +216,9 @@ class HBNBCommand(cmd.Cmd):
             print("*** Unknown syntax: {}".format(line))
 
 
-    def parse(line):
-        '''Helper method to parse user typed input'''
-        return tuple(line.split())
+def parse(line):
+    '''Helper method to parse user typed input'''
+    return tuple(line.split())
 
 
 if __name__ == '__main__':
