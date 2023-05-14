@@ -15,9 +15,6 @@ from models.place import Place
 from models.amenity import Amenity
 from models.review import Review
 
-cclasses = {"BaseModel", "FileStorage", "User", "State",
-            "City", "Amenity", "Place", "Review"}
-
 
 class HBNBCommand(cmd.Cmd):
     """Defines the AirBnB command interpreter.
@@ -27,6 +24,8 @@ class HBNBCommand(cmd.Cmd):
     """
 
     prompt = "(hbnb) "
+    classes = {"BaseModel", "FileStorage", "User", "State",
+            "City", "Amenity", "Place", "Review"}
 
     def emptyline(self):
         """Do nothing upon receiving an empty line."""
@@ -81,7 +80,7 @@ class HBNBCommand(cmd.Cmd):
             args = args.split()
             if len(args) != 2:
                 print("** instance id missing **")
-            elif args[0] not in HBNBCommand.__classes:
+            elif args[0] not in HBNBCommand.classes:
                 print("** class doesn't exist **")
             else:
                 for k, v in storage.all().items():
@@ -99,7 +98,7 @@ class HBNBCommand(cmd.Cmd):
         elif len(args) < 2:
             print("** instance id missing **")
             return
-        if args[0] not in HBNBCommand.__classes:
+        if args[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
         for k, v in storage.all().items():
