@@ -2,10 +2,7 @@
 """Create the AirBnB  console."""
 
 import cmd
-import json
-import re
 from shlex import split
-import models
 from models import storage
 from models.base_model import BaseModel
 from models.user import User
@@ -214,11 +211,6 @@ class HBNBCommand(cmd.Cmd):
                 print("*** Unknown syntax: {}".format(line))
         except IndexError:
             print("*** Unknown syntax: {}".format(line))
-
-
-def parse(line):
-    '''Helper method to parse user typed input'''
-    return tuple(line.split())
 
 
 if __name__ == '__main__':
