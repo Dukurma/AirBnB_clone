@@ -1,8 +1,11 @@
 #!/usr/bin/python3
 """Create the AirBnB  console."""
+
 import cmd
 import json
+import re
 from shlex import split
+import models
 from models import storage
 from models.base_model import BaseModel
 from models.user import User
@@ -13,7 +16,8 @@ from models.amenity import Amenity
 from models.review import Review
 
 cclasses = {"BaseModel", "FileStorage", "User", "State",
-               "City", "Amenity", "Place", "Review"}
+            "City", "Amenity", "Place", "Review"}
+
 
 class HBNBCommand(cmd.Cmd):
     """Defines the AirBnB command interpreter.
@@ -77,7 +81,7 @@ class HBNBCommand(cmd.Cmd):
             args = args.split()
             if len(args) != 2:
                 print("** instance id missing **")
-            elif args[0] not in classes:
+            elif args[0] not in HBNBCommand.__classes:
                 print("** class doesn't exist **")
             else:
                 for k, v in storage.all().items():
@@ -95,7 +99,7 @@ class HBNBCommand(cmd.Cmd):
         elif len(args) < 2:
             print("** instance id missing **")
             return
-        if args[0] not in classes:
+        if args[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
             return
         for k, v in storage.all().items():
@@ -107,7 +111,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, args):
         """ Prints all str representation of all instances """
-        split_args = shlex.split(args)
+        split_args = split(args)
         n_list = []
         dict_json = models.storage.all()
         if args:
@@ -129,7 +133,7 @@ class HBNBCommand(cmd.Cmd):
         if len(args) == 0:
             print("** class name missing **")
             return False
-        if args[0] in classes:
+        if args[0] in HBNBCommand.__classes:
             if len(args) > 1:
                 key = args[0] + '.' + args[1]
                 if key in storage.all():
