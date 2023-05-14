@@ -152,17 +152,17 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
     
     def do_count(self, line):
-            '''
-            Show the count of instances passed
-            '''
-            if line in HBNBCommand.classes:
-                count = 0
-                for key, objs in storage.all().items():
-                    if line in key:
-                        count += 1
-                print(count)
-            else:
-                print("** class doesn't exist **")
+        '''
+        Show the count of instances passed
+        '''
+        if line in HBNBCommand.classes:
+            count = 0
+            for key, objs in storage.all().items():
+                if line in key:
+                    count += 1
+            print(count)
+        else:
+            print("** class doesn't exist **")
 
     def default(self, line):
         '''
