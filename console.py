@@ -68,7 +68,7 @@ class HBNBCommand(cmd.Cmd):
         elif args not in HBNBCommand.classes:
             print("** class doesn't exist **")
         else:
-            instance = eval[args]()
+            instance = eval(args)()
             instance.save()
             print(instance.id)
 
@@ -110,21 +110,22 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, args):
         """ Prints all str representation of all instances """
-        split_args = split(args)
-        n_list = []
-        dict_json = models.storage.all()
-        if args:
-            try:
-                for key in models.storage.all():
-                    if split_args[0] == key.split('.')[0]:
-                        n_list.append(str(dict_json[key]))
-                print(n_list)
-            except Exception:
-                print("** class doesn't exist **")
+        if not args:
+            print("** class name missing **")
+            return
+
+        arg = args.split(' ')
+
+        if arg[0] not in HBNBCommand.classes:
+            print("** class doesn't exist **")
         else:
-            for key in models.storage.all():
-                n_list.append(str(models.storage.all()[key]))
-            print(n_list)
+            all_objs = storage.all()
+            list_instances = []
+            for key, value in all_objs.items():
+                ob_name = value.__class__.__name__
+                if ob_name == arg[0]:
+                    list_instances += [value.__str__()]
+            print(list_instances)
 
     def do_update(self, args):
         """ Updates an instance based on the class name and id """
@@ -132,7 +133,7 @@ class HBNBCommand(cmd.Cmd):
         if len(args) == 0:
             print("** class name missing **")
             return False
-        if args[0] in HBNBCommand.__classes:
+        if args[0] in HBNBCommand.classes:
             if len(args) > 1:
                 key = args[0] + '.' + args[1]
                 if key in storage.all():
